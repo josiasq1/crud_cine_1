@@ -1,76 +1,71 @@
-# 🎬 CRUD CINE - Sistema de Gestión Cinematográfica
+# 🎬 CRUD CINE — Sistema de Gestión Cinematográfica
 
-Este proyecto es una aplicación **Spring Boot** para la gestión integral de un cine. Permite administrar empleados, películas, proyecciones y entradas, implementando una arquitectura de persistencia dual:
+Descripción
+Una aplicación backend construida con Spring Boot para gestionar empleados, películas, proyecciones y ventas de entradas. Usa MySQL como base de datos relacional principal y MongoDB para documentos/logs (sincronización de empleados).
 
-* **MySQL** como base de datos relacional principal (fuente de verdad).
-* **MongoDB** como almacenamiento de documentos (logs y sincronización de empleados).
+Índice
+- [Tecnologías](#tecnologías)
+- [Requisitos](#requisitos)
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Instalación y configuración](#instalación-y-configuración)
+- [Ejecución](#ejecución)
+- [Endpoints principales](#endpoints-principales)
+- [Notas](#notas)
 
----
+Tecnologías
+- Java 17+
+- Spring Boot
+- MySQL
+- MongoDB
+- Maven
 
-## 📂 Estructura del Proyecto
+Requisitos
+- Java JDK 17 o superior
+- MySQL Server (puerto 3306 o 3307)
+- MongoDB (puerto 27017)
+- Maven 3.8+
+- IDE (VS Code, IntelliJ, Eclipse)
+- Postman (opcional)
 
-Basado en la estructura de paquetes definida:
-
+Estructura del proyecto
 ```text
 com.example.crud_cine
 │
 ├── CrudCineApplication.java
-│
-├── conexion
-│   └── ConexionBD.java
-│
-├── controller
+├── conexion/ConexionBD.java
+├── controller/
 │   ├── EmpleadoController.java
 │   ├── EntradasController.java
 │   ├── PeliculasController.java
 │   └── ProyeccionesController.java
-│
-├── model
-│   ├── mysql
+├── model/
+│   ├── mysql/
 │   │   ├── Empleado.java
 │   │   ├── Entradas.java
 │   │   ├── Peliculas.java
 │   │   └── Proyecciones.java
-│   │
-│   └── mongo
+│   └── mongo/
 │       └── EmpleadoDoc.java
-│
-├── repository
+├── repository/
 │   ├── EmpleadoRepository.java
 │   ├── EntradasRepository.java
 │   ├── PeliculasRepository.java
 │   ├── ProyeccionesRepository.java
 │   └── EmpleadoDocRepository.java
-│
-└── service
+└── service/
     ├── EmpleadoService.java
     ├── EntradasService.java
     ├── PeliculasService.java
     └── ProyeccionesService.java
+```
 
-🛠️ Requisitos
-Java JDK 17 o superior.
+Instalación y configuración
+1. Clonar el repositorio.
+2. Crear la base de datos MySQL llamada `datoscine`.
+3. Asegurarse de que MySQL y MongoDB estén activos.
+4. Actualizar `src/main/resources/application.properties` con tus credenciales. Ejemplo:
 
-MySQL Server (Puerto 3306 por defecto o 3307 según tu configuración).
-
-MongoDB (Puerto 27017).
-
-Maven 3.8+.
-
-IDE compatible (IntelliJ IDEA, Eclipse o VS Code).
-
-Postman (Opcional para pruebas de endpoints).
-
-⚙️ Instalación
-Clonar el repositorio del proyecto.
-
-Crear la base de datos datoscine en MySQL.
-
-Verificar que los servicios de MySQL y MongoDB estén en ejecución.
-
-Configurar el archivo src/main/resources/application.properties con tus credenciales locales:
-
-Properties
+```properties
 # Configuración de MySQL
 spring.datasource.url=jdbc:mysql://localhost:3306/datoscine
 spring.datasource.username=root
@@ -78,13 +73,33 @@ spring.datasource.password=tu_contraseña
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 
-# Puerto del Servidor
+# Puerto del servidor
 server.port=8090
 
 # Configuración de MongoDB
 spring.data.mongodb.uri=mongodb://localhost:27017/cine_logs
-Ejecutar el proyecto desde la raíz con Maven:
+```
 
-Bash
+Ejecución
+Desde la raíz del proyecto (Windows PowerShell o CMD):
+```bash
 mvn spring-boot:run
-La aplicación quedará disponible en: http://localhost:8090
+```
+La API quedará disponible en: http://localhost:8090/api
+
+Endpoints principales
+- Empleados
+  - GET  /api/empleados  — Listar empleados (MySQL/Mongo)
+  - POST /api/empleados  — Crear empleado y sincronizar con Mongo
+- Películas
+  - GET  /api/peliculas  — Listar cartelera
+  - POST /api/peliculas  — Registrar película
+- Proyecciones
+  - GET  /api/proyecciones — Listar horarios y salas
+- Entradas
+  - POST /api/entradas — Registrar venta de entrada
+
+Notas
+- En peticiones POST usar header `Content-Type: application/json`.
+- Ajustar puertos/credenciales en `application.properties` según tu entorno.
+- Si MySQL usa un puerto distinto, modificar la URL de conexión.
