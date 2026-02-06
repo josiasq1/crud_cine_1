@@ -98,6 +98,7 @@ Endpoints principales
   - GET  /api/proyecciones — Listar horarios y salas
 - Entradas
   - POST /api/entradas — Registrar venta de entrada
+ Todo echo con IA
 
 Notas
 - En peticiones POST usar header `Content-Type: application/json`.
