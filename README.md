@@ -47,31 +47,35 @@ com.example.crud_cine
     ├── EntradasService.java
     ├── PeliculasService.java
     └── ProyeccionesService.java
-## 🛠️ Requisitos
 
-* **Java JDK 17** o superior.
-* **MySQL Server** (Puerto 3307).
-* **MongoDB** (Puerto 27017).
-* **Maven 3.8+**.
-* **IDE compatible** (IntelliJ IDEA, Eclipse o VS Code).
-* **Postman** (Opcional para pruebas de endpoints).
+🛠️ Requisitos
+Java JDK 17 o superior.
 
----
+MySQL Server (Puerto 3306 por defecto o 3307 según tu configuración).
 
-## ⚙️ Instalación
+MongoDB (Puerto 27017).
 
-1. **Clonar** el repositorio del proyecto.
-2. **Crear** la base de datos `datoscine` en MySQL.
-3. **Verificar** que MySQL esté escuchando en el puerto configurado (3307).
-4. **Verificar** que MongoDB esté en ejecución.
-5. **Configurar** el archivo `src/main/resources/application.properties` con los siguientes valores:
+Maven 3.8+.
 
-```properties
+IDE compatible (IntelliJ IDEA, Eclipse o VS Code).
+
+Postman (Opcional para pruebas de endpoints).
+
+⚙️ Instalación
+Clonar el repositorio del proyecto.
+
+Crear la base de datos datoscine en MySQL.
+
+Verificar que los servicios de MySQL y MongoDB estén en ejecución.
+
+Configurar el archivo src/main/resources/application.properties con tus credenciales locales:
+
+Properties
 # Configuración de MySQL
-spring.datasource.url=jdbc:mysql://localhost:3307/datoscine
+spring.datasource.url=jdbc:mysql://localhost:3306/datoscine
 spring.datasource.username=root
-spring.datasource.password=
-spring.jpa.hibernate.ddl-auto=validate
+spring.datasource.password=tu_contraseña
+spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 
 # Puerto del Servidor
@@ -79,11 +83,11 @@ server.port=8090
 
 # Configuración de MongoDB
 spring.data.mongodb.uri=mongodb://localhost:27017/cine_logs
+Ejecutar el proyecto desde la raíz con Maven:
 
-## ⚙️ Ejecutar el proyecto desde la raíz:
+Bash
 mvn spring-boot:run
-
-# La aplicación quedará disponible en: http://localhost:8090
+La aplicación quedará disponible en: http://localhost:8090
 
 ---
 
