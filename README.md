@@ -104,3 +104,5 @@ Notas
 - En peticiones POST usar header `Content-Type: application/json`.
 - Ajustar puertos/credenciales en `application.properties` según tu entorno.
 - Si MySQL usa un puerto distinto, modificar la URL de conexión.
+
+- TODO ECHO POR IA
