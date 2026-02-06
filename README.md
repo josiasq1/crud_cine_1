@@ -84,3 +84,20 @@ spring.data.mongodb.uri=mongodb://localhost:27017/cine_logs
 mvn spring-boot:run
 
 # La aplicación quedará disponible en: http://localhost:8090
+
+---
+
+## 🚀 Endpoints Principales (Postman)
+
+La API corre en `http://localhost:8090/api` (o la ruta base que hayas definido).
+
+| Entidad | Método | Endpoint | Descripción |
+| :--- | :--- | :--- | :--- |
+| **Empleados** | `GET` | `/empleados` | Listar todos los empleados (MySQL/Mongo) |
+| | `POST` | `/empleados` | Crear nuevo empleado y sincronizar |
+| **Películas** | `GET` | `/peliculas` | Listar cartelera |
+| | `POST` | `/peliculas` | Registrar nueva película |
+| **Entradas** | `POST` | `/entradas` | Registrar venta de entrada |
+| **Proyecciones**| `GET` | `/proyecciones`| Ver horarios y salas |
+
+> **Nota:** Para los `POST`, asegúrate de enviar el `Content-Type: application/json` en el header de Postman.
